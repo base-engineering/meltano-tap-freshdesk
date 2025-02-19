@@ -225,7 +225,7 @@ def do_sync():
 
     # Extract enabled streams directly from metadata
     selected_streams = {
-        key for key, value in CONFIG.get("metadata", {}).items() if value.get("selected", False)
+        key for key, value in CONFIG.get("streams", {}).items() if value.get("selected", False)
     }
 
     logger.info(f"Selected streams: {', '.join(selected_streams) if selected_streams else 'None'}")
