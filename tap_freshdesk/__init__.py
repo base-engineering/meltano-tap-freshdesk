@@ -229,7 +229,7 @@ def do_sync():
         sync_time_filtered("roles")
         sync_time_filtered("groups")
         # commenting out this high-volume endpoint for now
-        #sync_time_filtered("contacts")
+        sync_time_filtered("contacts")
         sync_time_filtered("companies")
     except HTTPError as e:
         logger.critical(
