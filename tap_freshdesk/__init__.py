@@ -228,6 +228,8 @@ def do_sync():
         key for key, value in CONFIG.get("metadata", {}).items() if value.get("selected", False)
     }
 
+    logger.info(f"Selected streams: {', '.join(selected_streams) if selected_streams else 'None'}")
+
     try:
         if "tickets" in selected_streams:
             sync_tickets()
