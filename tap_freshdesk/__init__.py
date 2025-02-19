@@ -223,14 +223,24 @@ def sync_time_filtered(entity):
 def do_sync():
     logger.info("Starting FreshDesk sync")
 
+    # Extract enabled streams directly from metadata
+    selected_streams = {
+        key for key, value in CONFIG.get("metadata", {}).items() if value.get("selected", False)
+    }
+
     try:
-        sync_tickets()
-        sync_time_filtered("agents")
-        sync_time_filtered("roles")
-        sync_time_filtered("groups")
-        # commenting out this high-volume endpoint for now
-        sync_time_filtered("contacts")
-        sync_time_filtered("companies")
+        if "tickets" in selected_streams:
+            sync_tickets()
+        if "contacts" in selected_streams:
+            sync_time_filtered("contacts")
+        if "agents" in selected_streams:
+            sync_time_filtered("agents")
+        if "roles" in selected_streams:
+            sync_time_filtered("roles")
+        if "groups" in selected_streams:
+            sync_time_filtered("groups")
+        if "companies" in selected_streams:
+            sync_time_filtered("companies")
     except HTTPError as e:
         logger.critical(
             "Error making request to Freshdesk API: GET %s: [%s - %s]",
