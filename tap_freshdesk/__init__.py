@@ -223,7 +223,7 @@ def sync_time_filtered(entity):
 def do_sync():
     logger.info("Starting FreshDesk sync")
 
-    # Extract enabled streams directly from metadata
+    # Extract enabled streams from config
     selected_streams = {
         key for key, value in CONFIG.get("streams", {}).items() if value.get("selected", False)
     }
