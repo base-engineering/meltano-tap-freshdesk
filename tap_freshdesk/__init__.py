@@ -157,7 +157,7 @@ def sync_tickets_by_filter(bookmark_property, predefined_filter=None):
         try:
             for subrow in gen_request(get_url("sub_ticket", id=row['id'], entity="conversations")):
                 # subrow.pop("attachments", None)
-                # subrow.pop("body", None)
+                subrow.pop("body", None)
                 if subrow[bookmark_property] >= start:
                     singer.write_record("conversations", subrow, time_extracted=singer.utils.now())
         except HTTPError as e:
