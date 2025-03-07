@@ -73,9 +73,19 @@ def gen_request(url, params=None):
     params = params or {}
     params["per_page"] = PER_PAGE
     page = 1
+    entity = url.split('/')[-1]  # Extract entity name from the URL, assuming it's the last part of the path.
+    
     while True:
         params['page'] = page
+        
+        # Log current page and entity being processed
+        logger.info(f"Fetching page {page} for entity {entity} ({url})")
+        
         data = request(url, params).json()
+        
+        # Log number of records fetched
+        logger.info(f"Fetched {len(data)} records from page {page} of entity {entity}")
+        
         for row in data:
             yield row
 
