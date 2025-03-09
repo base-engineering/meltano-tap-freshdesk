@@ -65,7 +65,7 @@ def request(url, params=None):
 def get_start(entity):
     if entity not in STATE:
         # Default start date for contacts and companies is 1970-01-01 if no state exists
-        if entity in ["contacts", "companies"]:
+        if entity in ["contacts", "companies", "agents"]:
             return "1970-01-01T00:00:00Z"
         return CONFIG['start_date']
 
